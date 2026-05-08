@@ -14,6 +14,6 @@ export async function getUser(userName) {
         return data
 
     } catch(error) {
-        return state.error = error
+        throw error
     }   
 }
