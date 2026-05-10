@@ -1,6 +1,9 @@
 // Show ui informations
-import { state } from "./state.js";
-const container = document.getElementById("search-result")
+
+import { state } from "./state.js"
+
+const containerResult = document.getElementById("search-result")
+const containerStatus = document.getElementById("search-status")
 
 function renderProfile () {
     const userName = document.createElement("p")
@@ -10,10 +13,16 @@ function renderProfile () {
     userProfileImg.src = state.profileImg
 
 
-    container.append(userName, userProfileImg)
+    containerResult.append(userName, userProfileImg)
 }
 
 function handleLoading() {
+    const status = state.loading
+
+    const p = document.createElement("p")
+    p.textContent = status
+
+    containerStatus.append(p)
     
 }
 
@@ -22,10 +31,12 @@ function handleError() {
 }
 
 export function render() {
-    container.textContent = ""
+    containerResult.textContent = ""
+    containerStatus.textContent = ""
 
     if(state.loading) {
         handleLoading()
+        console.log('entrou no loading')
         return
     }
         
@@ -34,6 +45,6 @@ export function render() {
         handleError()
         return
     }
-        
-    renderProfile()
+
+    renderProfile()   
 }
